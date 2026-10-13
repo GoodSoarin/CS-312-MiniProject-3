@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Settings</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container small-container">
+        <h1>Update Account</h1>
+        
+        <!-- BONUS CHALLENGE: ACCOUNT UPDATES -->
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% if (success) { %>
+            <p style="color: green;"><%= success %></p>
+        <% } %>
+        
+        <form action="/account" method="POST">
+            <label>Update User ID:</label>
+            <input type="text" name="new_user_id" value="<%= currentUser %>" required>
+            
+            <label>Update Password:</label>
+            <input type="password" name="new_password" placeholder="New Password" required>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+        
+        <br>
+        <a href="/" class="btn" style="background: #666;">Back to Feed</a>
+    </div>
+</body>
+</html>

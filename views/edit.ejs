@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Post</h1>
+        <div class="form-container">
+            <form action="/edit/<%= post.blog_id %>" method="POST">
+                <label>Title:</label>
+                <input type="text" name="title" value="<%= post.title %>" required>
+                
+                <label>Content:</label>
+                <textarea name="body" required><%= post.body %></textarea>
+                
+                <button type="submit">Update Post</button>
+                <a href="/" class="btn" style="text-decoration: none; color: black; background: #ccc;">Cancel</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

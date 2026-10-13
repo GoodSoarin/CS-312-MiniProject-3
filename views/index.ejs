@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Blog Feed</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="header-nav">
+        Logged in as: <strong><%= currentUserName %></strong> 
+        <a href="/account" class="btn">Account Settings</a>
+        <a href="/logout" class="btn delete-btn">Logout</a>
+    </div>
+
+    <div class="container">
+        <h1>Blog Feed</h1>
+        
+        <div class="form-container">
+            <h2>Create a New Post</h2>
+            <form action="/add" method="POST">
+                <input type="text" name="title" placeholder="Blog Title" required>
+                <textarea name="body" placeholder="Write your blog post here..." required></textarea>
+                <button type="submit">Submit Post</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <h2>Recent Posts</h2>
+        <div class="posts-list">
+            <% if (posts.length === 0) { %>
+                <p>No posts yet.</p>
+            <% } %>
+
+            <% posts.forEach(function(post) { %>
+                <div class="post-card">
+                    <h3><%= post.title %></h3>
+                    <p class="post-meta">
+                        By <%= post.creator_name %> on <%= post.date_created.toDateString() %>
+                    </p>
+                    <p class="post-content"><%= post.body %></p>
+                    
+                    <!-- Only show Edit and Delete buttons if the logged-in user is the creator -->
+                    <% if (post.creator_user_id === currentUser) { %>
+                        <div class="post-actions">
+                            <a href="/edit/<%= post.blog_id %>" class="btn edit-btn">Edit</a>
+                            <form action="/delete/<%= post.blog_id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>
